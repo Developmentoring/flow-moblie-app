@@ -1,15 +1,36 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import { ActivityIndicator, FlatList } from 'react-native';
 
 export default function TabSamScreen() {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([{
+    id: '',
+    title: '',
+    releaseYear: ''
+  }]);
+
+  useEffect(() => {
+    fetch('https://reactnative.dev/movies.json')
+      .then((response) => response.json())
+      .then((json) => setData(json.movies))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Sam</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.js" />
+    <View style={{ flex: 1, padding: 24 }}>
+      {isLoading ? <ActivityIndicator /> : (
+        <FlatList
+          data={data}
+          keyExtractor={({ id }) => id}
+          renderItem={(movie) => (
+            <Text>{movie.item.id}. {movie.item.title}, {movie.item.releaseYear}</Text>
+          )}
+        />
+      )}
     </View>
   );
 }
