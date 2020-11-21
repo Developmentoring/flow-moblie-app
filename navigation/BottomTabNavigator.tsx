@@ -5,9 +5,10 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+import TabSamScreen from '../screens/TabSamScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabSamParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -18,6 +19,13 @@ export default function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="TabOne"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      <BottomTab.Screen
+        name="Sam"
+        component={TabSamNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
+      />
       <BottomTab.Screen
         name="TabOne"
         component={TabOneNavigator}
@@ -69,5 +77,19 @@ function TabTwoNavigator() {
         options={{ headerTitle: 'Tab Two Title' }}
       />
     </TabTwoStack.Navigator>
+  );
+}
+
+const TabSamStack = createStackNavigator<TabSamParamList>();
+
+function TabSamNavigator() {
+  return (
+    <TabSamStack.Navigator>
+      <TabSamStack.Screen
+        name="TabSamScreen"
+        component={TabSamScreen}
+        options={{ headerTitle: 'Tab One Title' }}
+      />
+    </TabSamStack.Navigator>
   );
 }
