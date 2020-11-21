@@ -3,14 +3,11 @@ import { StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { ActivityIndicator, FlatList } from 'react-native';
+import { Movie } from '../types';
 
 export default function TabSamScreen() {
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([{
-    id: '',
-    title: '',
-    releaseYear: ''
-  }]);
+  const [data, setData] = useState<Movie[]>([]);
 
   useEffect(() => {
     fetch('https://reactnative.dev/movies.json')

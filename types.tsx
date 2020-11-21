@@ -20,3 +20,9 @@ export type TabTwoParamList = {
 export type TabSamParamList = {
   TabSamScreen: undefined;
 };
+
+export type Movie = {
+  id: string;
+  title: string;
+  releaseYear: string;
+}
