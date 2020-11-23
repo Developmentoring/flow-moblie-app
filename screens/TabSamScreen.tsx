@@ -10,7 +10,7 @@ export default function TabSamScreen() {
   const [data, setData] = useState<Movie[]>([]);
 
   useEffect(() => {
-    fetch('https://reactnative.dev/movies.json')
+    fetch('https://pacific-peak-69023.herokuapp.com/movies.json')
       .then((response) => response.json())
       .then((json) => setData(json.movies))
       .catch((error) => console.error(error))
@@ -23,8 +23,8 @@ export default function TabSamScreen() {
         <FlatList
           data={data}
           keyExtractor={({ id }) => id}
-          renderItem={(movie) => (
-            <Text>{movie.item.id}. {movie.item.title}, {movie.item.releaseYear}</Text>
+          renderItem={({ item }) => (
+            <Text>{item.id}. {item.title}, {item.releaseYear}</Text>
           )}
         />
       )}

@@ -88,7 +88,7 @@ function TabSamNavigator() {
       <TabSamStack.Screen
         name="TabSamScreen"
         component={TabSamScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+        options={{ headerTitle: 'Tab Sam Title' }}
       />
     </TabSamStack.Navigator>
   );
