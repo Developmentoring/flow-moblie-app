@@ -1,4 +1,3 @@
-// import * as React from 'react';
 import React, { useState } from "react";
 import { TextInput, Button } from 'react-native';
 
@@ -24,7 +23,7 @@ export default function LoginForm() {
       />
       <Button
         onPress={() => {
-          loginRequest(email, password);
+          createSession(email, password);
         }}
         title='Submit'
       />
@@ -32,7 +31,7 @@ export default function LoginForm() {
   );
 }
 
-function loginRequest(email, password) {
+function createSession(email: string, password: string) {
   fetch('http://localhost:3000/api/sessions', {
     method: 'POST',
     headers: {
