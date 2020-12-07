@@ -13,11 +13,6 @@ export default function LoginScreen({ navigation }) {
       <Text style={styles.title}>Login</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <Login />
-
-      <Button
-        title="Go to Home"
-        onPress={() => navigation.navigate('Root', { screen: 'Home' })}
-      />
     </View>
   );
 }
