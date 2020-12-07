@@ -41,7 +41,7 @@ const LoginTab = <BottomTab.Screen
   name="Login"
   component={TabLoginNavigator}
   options={{
-    tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+    tabBarIcon: ({ color }) => <TabBarIcon name="ios-log-in" color={color} />,
   }}
 />
 
@@ -50,7 +50,7 @@ const SamTab = <BottomTab.Screen
   name="Sam"
   component={TabSamNavigator}
   options={{
-    tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+    tabBarIcon: ({ color }) => <TabBarIcon name="logo-octocat" color={color} />,
   }}
 />
 
@@ -59,7 +59,7 @@ const TabOneTab = <BottomTab.Screen
   name="TabOne"
   component={TabOneNavigator}
   options={{
-    tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+    tabBarIcon: ({ color }) => <TabBarIcon name="logo-reddit" color={color} />,
   }}
 />
 
@@ -68,7 +68,7 @@ const HomeTab = <BottomTab.Screen
   name="Home"
   component={HomeNavigator}
   options={{
-    tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+    tabBarIcon: ({ color }) => <TabBarIcon name="logo-youtube" color={color} />,
   }}
 />
 
