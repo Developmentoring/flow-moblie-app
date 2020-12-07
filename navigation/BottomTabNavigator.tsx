@@ -17,46 +17,63 @@ import {
   TabSamParamList
 } from '../types';
 
+import { useSelector } from 'react-redux';
+import { selectSessionToken } from '../features/login/sessionSlice';
+
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
+  const sessionToken = useSelector(selectSessionToken);
+  const isLoggedIn = sessionToken != '' ? true : false
 
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
-      <BottomTab.Screen
-        name="Login"
-        component={TabLoginNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Sam"
-        component={TabSamNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Home"
-        component={HomeNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
+      {isLoggedIn ? LoggedInScreens : LoggedOutScreens}
     </BottomTab.Navigator>
   );
 }
+
+const LoginTab = <BottomTab.Screen
+  key="login"
+  name="Login"
+  component={TabLoginNavigator}
+  options={{
+    tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+  }}
+/>
+
+const SamTab = <BottomTab.Screen
+  key="Sam"
+  name="Sam"
+  component={TabSamNavigator}
+  options={{
+    tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+  }}
+/>
+
+const TabOneTab = <BottomTab.Screen
+  key="TabOne"
+  name="TabOne"
+  component={TabOneNavigator}
+  options={{
+    tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+  }}
+/>
+
+const HomeTab = <BottomTab.Screen
+  key="Home"
+  name="Home"
+  component={HomeNavigator}
+  options={{
+    tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+  }}
+/>
+
+const LoggedInScreens = [SamTab, HomeTab, TabOneTab]
+const LoggedOutScreens = [LoginTab]
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
