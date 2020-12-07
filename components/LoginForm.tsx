@@ -1,11 +1,29 @@
 import React, { useState } from "react";
 import { TextInput, Button } from 'react-native';
 
-import { Text, TextProps } from './Themed';
-
 export default function LoginForm() {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
+  const [session, setSession] = useState({});
+
+  function createSession(email: string, password: string) {
+    fetch('http://localhost:3000/api/sessions', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          email: email,
+          password: password
+        }
+      })
+    }).then((response) => response.json())
+      .then((session) => setSession(session))
+      .catch((error) => console.error(error))
+      .finally(() => { });
+  }
 
   return (
     <div>
@@ -29,20 +47,4 @@ export default function LoginForm() {
       />
     </div>
   );
-}
-
-function createSession(email: string, password: string) {
-  fetch('http://localhost:3000/api/sessions', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      user: {
-        email: email,
-        password: password
-      }
-    })
-  });
 }
