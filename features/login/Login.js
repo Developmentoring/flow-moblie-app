@@ -10,13 +10,17 @@ import {
   View
 } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
   const sessionToken = useSelector(selectSessionToken);
   const dispatch = useDispatch();
 
+  const navigation = useNavigation();
+
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
+
 
   function createSession(email, password) {
     fetch('http://localhost:3000/api/sessions', {
@@ -33,6 +37,7 @@ export default function Login() {
       })
     }).then((response) => response.json())
       .then((session) => dispatch(setToken(session)))
+      .then(() => { navigation.navigate('Home') })
       .catch((error) => console.error(error))
   }
 
