@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
+import Counter from '../features/counter/Counter';
 import LoginForm from '../components/LoginForm';
+import Login from '../features/login/Login';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
@@ -11,7 +13,8 @@ export default function TabOneScreen() {
       <Text style={styles.title}>Tab One</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="/screens/TabOneScreen.js" />
-      <LoginForm />
+      <Login />
+      <Counter />
     </View>
   );
 }
