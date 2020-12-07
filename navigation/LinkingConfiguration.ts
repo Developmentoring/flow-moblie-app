@@ -6,7 +6,12 @@ export default {
     screens: {
       Root: {
         screens: {
-          TabSam: {
+          Login: {
+            screens: {
+              TabLoginScreen: 'login',
+            },
+          },
+          Sam: {
             screens: {
               TabSamScreen: 'sam',
             },
@@ -16,9 +21,9 @@ export default {
               TabOneScreen: 'one',
             },
           },
-          TabTwo: {
+          Home: {
             screens: {
-              TabTwoScreen: 'two',
+              HomeScreen: 'home',
             },
           },
         },

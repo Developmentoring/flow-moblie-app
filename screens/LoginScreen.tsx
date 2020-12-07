@@ -1,13 +1,23 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
+import Login from '../features/login/Login';
 import { Text, View } from '../components/Themed';
+import {
+  Button,
+} from 'react-native';
 
-export default function TabOneScreen() {
+export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>This is Tab one!</Text>
+      <Text style={styles.title}>Login</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <Login />
+
+      <Button
+        title="Go to Home"
+        onPress={() => navigation.navigate('Root', { screen: 'Home' })}
+      />
     </View>
   );
 }

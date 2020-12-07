@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  clear,
   setToken,
   selectSessionToken,
 } from './sessionSlice';
-import styles from './Login.module.css';
-import { TextInput, Button } from 'react-native';
+import {
+  TextInput,
+  Button,
+  View
+} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default function Login() {
   const sessionToken = useSelector(selectSessionToken);
   const dispatch = useDispatch();
-  // const [incrementAmount, setIncrementAmount] = useState('2');
 
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
-
-  const [session, setSession] = useState({});
 
   function createSession(email, password) {
     fetch('http://localhost:3000/api/sessions', {
@@ -37,18 +37,18 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <span>{sessionToken}</span>
+    <View style={styles.view}>
       <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1, padding: 10 }}
+        style={styles.input}
         onChangeText={email => onChangeEmail(email)}
         placeholder='email'
         value={email}
       />
       <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1, padding: 10 }}
+        style={styles.input}
         onChangeText={password => onChangePassword(password)}
         placeholder='password'
+        secureTextEntry={true}
         value={password}
       />
       <Button
@@ -57,6 +57,24 @@ export default function Login() {
         }}
         title='Submit'
       />
-    </div>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 10,
+    width: '100%'
+  },
+  view: {
+    flexDirection: 'column',
+    width: '100%',
+    maxWidth: 450,
+    paddingLeft: 30,
+    paddingRight: 30
+  },
+});

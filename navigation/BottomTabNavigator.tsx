@@ -7,8 +7,15 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabSamScreen from '../screens/TabSamScreen';
 import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabSamParamList } from '../types';
+import HomeScreen from '../screens/HomeScreen';
+import LoginScreen from '../screens/LoginScreen';
+import {
+  TabLoginParamList,
+  BottomTabParamList,
+  TabOneParamList,
+  HomeParamList,
+  TabSamParamList
+} from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -17,8 +24,15 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      <BottomTab.Screen
+        name="Login"
+        component={TabLoginNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
+      />
       <BottomTab.Screen
         name="Sam"
         component={TabSamNavigator}
@@ -34,8 +48,8 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="Home"
+        component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
@@ -66,17 +80,17 @@ function TabOneNavigator() {
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const HomeStack = createStackNavigator<HomeParamList>();
 
-function TabTwoNavigator() {
+function HomeNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ headerTitle: 'Home' }}
       />
-    </TabTwoStack.Navigator>
+    </HomeStack.Navigator>
   );
 }
 
@@ -91,5 +105,24 @@ function TabSamNavigator() {
         options={{ headerTitle: 'Tab Sam Title' }}
       />
     </TabSamStack.Navigator>
+  );
+}
+
+const TabLoginStack = createStackNavigator<TabLoginParamList>();
+
+function TabLoginNavigator() {
+  return (
+    <TabLoginStack.Navigator>
+      <TabLoginStack.Screen
+        name="TabLoginScreen"
+        component={LoginScreen}
+        options={{ headerTitle: 'Login' }}
+      />
+      <TabLoginStack.Screen
+        name="TabSamScreen"
+        component={TabSamScreen}
+        options={{ headerTitle: 'Tab Sam Title' }}
+      />
+    </TabLoginStack.Navigator>
   );
 }
