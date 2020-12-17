@@ -3,16 +3,16 @@ import { StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { ActivityIndicator, FlatList } from 'react-native';
-import { Movie } from '../types';
+import { Task } from '../types';
 
 export default function TabSamScreen() {
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState<Movie[]>([]);
+  const [data, setData] = useState<Task[]>([]);
 
   useEffect(() => {
-    fetch('https://pacific-peak-69023.herokuapp.com/movies.json')
+    fetch('http://localhost:3000/api/tasks.json')
       .then((response) => response.json())
-      .then((json) => setData(json.movies))
+      .then((json) => setData(json.tasks))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, []);
@@ -24,7 +24,7 @@ export default function TabSamScreen() {
           data={data}
           keyExtractor={({ id }) => id}
           renderItem={({ item }) => (
-            <Text>{item.id}. {item.title}, {item.releaseYear}</Text>
+            <Text>{item.id}. {item.name}</Text>
           )}
         />
       )}

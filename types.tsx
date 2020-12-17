@@ -32,3 +32,9 @@ export type Movie = {
   title: string;
   releaseYear: string;
 }
+
+export type Task = {
+  id: string;
+  name: string;
+  user_id: string;
+}
