@@ -37,4 +37,5 @@ export type Task = {
   id: string;
   name: string;
   user_id: string;
+  completed: string;
 }

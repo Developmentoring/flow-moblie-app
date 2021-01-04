@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { ActivityIndicator, FlatList } from 'react-native';
 import { Task } from '../types';
+import { CheckBox } from 'react-native-elements'
 
 export default function TabSamScreen() {
   const [isLoading, setLoading] = useState(true);
@@ -24,7 +25,10 @@ export default function TabSamScreen() {
           data={data}
           keyExtractor={({ id }) => id}
           renderItem={({ item }) => (
-            <Text>{item.id}. {item.name}</Text>
+            <CheckBox
+              title={item.name}
+              checked={item.completed === 'true'}
+            />
           )}
         />
       )}
