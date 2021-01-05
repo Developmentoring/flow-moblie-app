@@ -47,7 +47,7 @@ const LoginTab = <BottomTab.Screen
 
 const SamTab = <BottomTab.Screen
   key="Sam"
-  name="Sam"
+  name="Tasks"
   component={TabSamNavigator}
   options={{
     tabBarIcon: ({ color }) => <TabBarIcon name="logo-octocat" color={color} />,
@@ -119,7 +119,7 @@ function TabSamNavigator() {
       <TabSamStack.Screen
         name="TabSamScreen"
         component={TabSamScreen}
-        options={{ headerTitle: 'Tab Sam Title' }}
+        options={{ headerTitle: 'Tasks' }}
       />
     </TabSamStack.Navigator>
   );
@@ -138,7 +138,7 @@ function TabLoginNavigator() {
       <TabLoginStack.Screen
         name="TabSamScreen"
         component={TabSamScreen}
-        options={{ headerTitle: 'Tab Sam Title' }}
+        options={{ headerTitle: 'Tasks' }}
       />
     </TabLoginStack.Navigator>
   );
