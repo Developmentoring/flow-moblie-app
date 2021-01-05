@@ -6,6 +6,9 @@ import { ActivityIndicator, FlatList } from 'react-native';
 import { Task } from '../types';
 import { CheckBox } from 'react-native-elements'
 
+import TaskList from '../features/tasks/TaskList'
+
+
 export default function TabSamScreen() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<Task[]>([]);
@@ -19,19 +22,8 @@ export default function TabSamScreen() {
   }, []);
 
   return (
-    <View style={{ flex: 1, padding: 24 }}>
-      {isLoading ? <ActivityIndicator /> : (
-        <FlatList
-          data={data}
-          keyExtractor={({ id }) => id}
-          renderItem={({ item }) => (
-            <CheckBox
-              title={item.name}
-              checked={item.completed === 'true'}
-            />
-          )}
-        />
-      )}
+    <View>
+      <TaskList />
     </View>
   );
 }
