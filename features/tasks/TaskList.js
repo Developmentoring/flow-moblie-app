@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	setTasks,
 	selectTasks,
+	setTaskCompleted
 } from './tasksSlice';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native';
@@ -15,14 +16,9 @@ export default function TaskList() {
 	const dispatch = useDispatch();
 
 	const navigation = useNavigation();
-
 	const [isLoading, setLoading] = useState(true);
 
-	// const [email, onChangeEmail] = useState('');
-	// const [password, onChangePassword] = useState('');
-
 	useEffect(() => {
-
 		fetch('http://localhost:3000/api/tasks.json', {
 			method: 'GET',
 			headers: {
@@ -47,6 +43,7 @@ export default function TaskList() {
 						<CheckBox
 							title={item.name}
 							checked={item.completed === 'true'}
+							onPress={(a, b) => { dispatch(setTaskCompleted(item)) }}
 						/>
 					)}
 				/>

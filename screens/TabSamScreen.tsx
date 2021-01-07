@@ -1,26 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Text, View } from '../components/Themed';
-import { ActivityIndicator, FlatList } from 'react-native';
-import { Task } from '../types';
-import { CheckBox } from 'react-native-elements'
+import { View } from '../components/Themed';
 
 import TaskList from '../features/tasks/TaskList'
 
 
 export default function TabSamScreen() {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState<Task[]>([]);
-
-  useEffect(() => {
-    fetch('http://localhost:3000/api/tasks.json')
-      .then((response) => response.json())
-      .then((json) => setData(json.tasks))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-  }, []);
-
   return (
     <View>
       <TaskList />

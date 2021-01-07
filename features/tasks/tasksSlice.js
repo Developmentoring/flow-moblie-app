@@ -16,10 +16,20 @@ export const tasksSlice = createSlice({
     setTasks: (state, action) => {
       state.list = action.payload
     },
+    setTaskCompleted: (state, action) => {
+      const { list } = state
+      const { id } = action.payload
+
+      const existingTask = list.find(task => task.id === id)
+
+      if (existingTask) {
+        existingTask.completed = "true"
+      }
+    },
   },
 });
 
-export const { clear, setTasks } = tasksSlice.actions;
+export const { clear, setTasks, setTaskCompleted } = tasksSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
