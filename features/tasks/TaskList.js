@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-	setTasks,
+	fetchTasks,
 	selectTasks,
 	setTaskCompleted
 } from './tasksSlice';
@@ -15,27 +15,24 @@ export default function TaskList() {
 	const tasks = useSelector(selectTasks);
 	const dispatch = useDispatch();
 
-	const navigation = useNavigation();
-	const [isLoading, setLoading] = useState(true);
+	const taskStatus = useSelector(state => state.tasks.status)
+	const isLoaded = function () {
+		if (taskStatus === 'succeeded' || taskStatus === 'fulfilled') {
+			return true
+		} else {
+			return false
+		}
+	}
 
 	useEffect(() => {
-		fetch('http://localhost:3000/api/tasks.json', {
-			method: 'GET',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			}
-		}).then((response) => response.json())
-			.then((json) => {
-				dispatch(setTasks(json.tasks))
-				setLoading(false)
-			})
-			.catch((error) => alert(error))
-	}, []);
+		if (taskStatus === 'idle') {
+			dispatch(fetchTasks())
+		}
+	}, [taskStatus, dispatch])
 
 	return (
 		<View style={{ flex: 1, padding: 24 }}>
-			{isLoading ? <ActivityIndicator /> : (
+			{isLoaded() ? (
 				<FlatList
 					data={tasks}
 					keyExtractor={({ id }) => id}
@@ -47,7 +44,7 @@ export default function TaskList() {
 						/>
 					)}
 				/>
-			)}
+			) : <ActivityIndicator />}
 		</View>
 	);
 }

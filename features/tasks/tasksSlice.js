@@ -1,9 +1,31 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () => {
+  let tasks = undefined
+  let errorObj = undefined
+
+  await fetch('http://localhost:3000/api/tasks.json', {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      tasks = json.tasks
+    })
+    .catch((error) => errorObj = error)
+
+  return tasks
+})
 
 export const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
-    list: []
+    list: [],
+    status: 'idle',
+    error: null
   },
   reducers: {
     clear: state => {
@@ -23,10 +45,28 @@ export const tasksSlice = createSlice({
       const existingTask = list.find(task => task.id === id)
 
       if (existingTask) {
-        existingTask.completed = "true"
+        if (existingTask.completed === "false") {
+          existingTask.completed = "true"
+        } else {
+          existingTask.completed = "false"
+        }
       }
     },
   },
+  extraReducers: {
+    [fetchTasks.pending]: (state, action) => {
+      state.status = 'loading'
+    },
+    [fetchTasks.fulfilled]: (state, action) => {
+      state.status = 'succeeded'
+      // Add any fetched posts to the array
+      state.list = state.list.concat(action.payload)
+    },
+    [fetchTasks.rejected]: (state, action) => {
+      state.status = 'failed'
+      state.error = action.error.message
+    }
+  }
 });
 
 export const { clear, setTasks, setTaskCompleted } = tasksSlice.actions;
