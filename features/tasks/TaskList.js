@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	fetchTasks,
 	selectTasks,
-	setTaskCompleted
+	updateTask
 } from './tasksSlice';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native';
@@ -35,12 +35,12 @@ export default function TaskList() {
 			{isLoaded() ? (
 				<FlatList
 					data={tasks}
-					keyExtractor={({ id }) => id}
+					keyExtractor={({ id }) => id.toString()}
 					renderItem={({ item }) => (
 						<CheckBox
 							title={item.name}
-							checked={item.completed === 'true'}
-							onPress={(a, b) => { dispatch(setTaskCompleted(item)) }}
+							checked={item.completed === true}
+							onPress={(a, b) => { dispatch(updateTask(item)) }}
 						/>
 					)}
 				/>
