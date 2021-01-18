@@ -36,9 +36,15 @@ export default function Login() {
         }
       })
     }).then((response) => response.json())
-      .then((session) => dispatch(setToken(session)))
-      .then(() => { navigation.navigate('Home') })
-      .catch((error) => console.error(error))
+      .then((session) => {
+        if (session.error) {
+          throw session.error
+        } else {
+          dispatch(setToken(session))
+          navigation.navigate('Home')
+        }
+      })
+      .catch((error) => alert(error))
   }
 
   return (
