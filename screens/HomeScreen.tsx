@@ -4,11 +4,13 @@ import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
 
 import TaskList from '../features/tasks/TaskList'
+import TaskForm from '../features/tasks/TaskForm'
 
 export default function HomeScreen({ navigation }) {
   return (
     <View>
       <TaskList />
+      <TaskForm />
     </View>
   );
 }
