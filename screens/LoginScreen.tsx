@@ -3,9 +3,6 @@ import { StyleSheet } from 'react-native';
 
 import Login from '../features/login/Login';
 import { Text, View } from '../components/Themed';
-import {
-  Button,
-} from 'react-native';
 
 export default function LoginScreen({ navigation }) {
   return (

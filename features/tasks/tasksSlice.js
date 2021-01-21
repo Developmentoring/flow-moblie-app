@@ -45,6 +45,31 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async (_task) => 
   }
 })
 
+export const createTask = createAsyncThunk('tasks/createTask', async (_task) => {
+  let task = undefined
+  let errorObj = undefined
+
+  await fetch(`http://localhost:3000/api/tasks.json`, {
+    method: 'POST',
+    body: JSON.stringify({ task: { name: _task.name } }),
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      task = json
+    })
+    .catch((error) => { errorObj = error })
+
+  if (errorObj) {
+    throw errorObj
+  } else {
+    return task
+  }
+})
+
 export const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
@@ -66,9 +91,7 @@ export const tasksSlice = createSlice({
       state.list = action.payload
     },
     updateNewTask: (state, action) => {
-      state.newTask = {
-        name: action.payload
-      }
+      state.list.push({ id: 2, name: action.payload, completed: false })
     },
     setTaskCompleted: (state, action) => {
       const { list } = state
@@ -109,6 +132,19 @@ export const tasksSlice = createSlice({
       existingTask.completed = action.payload.completed
     },
     [updateTask.rejected]: (state, action) => {
+      state.status = 'failed'
+      state.error = action.error.message
+    },
+    [createTask.pending]: (state, action) => {
+      state.status = 'loading'
+    },
+    [createTask.fulfilled]: (state, action) => {
+      state.status = 'succeeded'
+
+      // Update the array of tasks
+      state.list = state.list.concat(action.payload)
+    },
+    [createTask.rejected]: (state, action) => {
       state.status = 'failed'
       state.error = action.error.message
     }
