@@ -25,7 +25,7 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
   const sessionToken = useSelector(selectSessionToken);
-  const isLoggedIn = sessionToken != '' ? true : false
+  const isLoggedIn = true ;//sessionToken != '' ? true : false
 
   return (
     <BottomTab.Navigator
