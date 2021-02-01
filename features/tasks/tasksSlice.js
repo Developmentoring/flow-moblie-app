@@ -4,7 +4,7 @@ export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () => {
   let tasks = undefined
   let errorObj = undefined
 
-  await fetch('http://localhost:3000/api/tasks.json', {
+  await fetch('https://flow-api-dev.herokuapp.com/api/tasks.json', {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -24,7 +24,7 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async (_task) => 
   let task = undefined
   let errorObj = undefined
 
-  await fetch(`http://localhost:3000/api/tasks/${_task.id}.json`, {
+  await fetch(`https://flow-api-dev.herokuapp.com/api/tasks/${_task.id}.json`, {
     method: 'PUT',
     body: JSON.stringify({ id: _task.id, task: { completed: !_task.completed } }),
     headers: {
@@ -49,7 +49,7 @@ export const createTask = createAsyncThunk('tasks/createTask', async (_task) => 
   let task = undefined
   let errorObj = undefined
 
-  await fetch(`http://localhost:3000/api/tasks.json`, {
+  await fetch(`https://flow-api-dev.herokuapp.com/api/tasks.json`, {
     method: 'POST',
     body: JSON.stringify({ task: { name: _task.name } }),
     headers: {

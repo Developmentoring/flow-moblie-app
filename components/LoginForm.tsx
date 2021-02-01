@@ -7,7 +7,7 @@ export default function LoginForm() {
   const [session, setSession] = useState({});
 
   function createSession(email: string, password: string) {
-    fetch('http://localhost:3000/api/sessions', {
+    fetch('https://flow-api-dev.herokuapp.com/api/sessions', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
