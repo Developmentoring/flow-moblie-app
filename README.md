@@ -6,6 +6,6 @@ Dependencies:
 * Install Expo-Cli: `yarn global add expo-cli`
 
 How to use:
-* `cd FlowMobile`
+* `cd flow-moblie-api`
 * `yarn install` to install npm packages
 * `yarn start` to run Expo server
