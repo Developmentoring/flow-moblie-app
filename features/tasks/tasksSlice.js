@@ -48,26 +48,27 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async (_task) => 
 export const createTask = createAsyncThunk('tasks/createTask', async (_task) => {
   let task = undefined
   let errorObj = undefined
-
-  await fetch(`https://flow-api-dev.herokuapp.com/api/tasks.json`, {
-    method: 'POST',
-    body: JSON.stringify({ task: { name: _task.name } }),
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-    .then((response) => response.json())
-    .then((json) => {
-      task = json
+  console.log('this ia the name: ' + _task);
+    await fetch(`https://flow-api-dev.herokuapp.com/api/tasks.json`, {
+      method: 'POST',
+      body: JSON.stringify({ task: { name: _task.name } }),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
     })
-    .catch((error) => { errorObj = error })
+      .then((response) => response.json())
+      .then((json) => {
+        task = json
+      })
+      .catch((error) => { errorObj = error })
 
-  if (errorObj) {
-    throw errorObj
-  } else {
-    return task
-  }
+    if (errorObj) {
+      throw errorObj
+    } else {
+      return task
+    }
+
 })
 
 export const tasksSlice = createSlice({

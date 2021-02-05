@@ -17,7 +17,8 @@ export default function TaskForm() {
         placeholder='Add a task'
         value={taskName}
         onChangeText={text => setTaskName(text)}
-        onSubmitEditing={event => dispatch(createTask({ name: taskName }))}
+        onSubmitEditing={event =>
+          taskName.length > 1 ? dispatch(createTask({ name: taskName })) : ''}
       />
     </View>
   );
