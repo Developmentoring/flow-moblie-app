@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import Login from '../features/login/Login';
+import Login, {navigation} from '../features/login/Login';
 import { Text, View } from '../components/Themed';
 
 export default function LoginScreen({ navigation }) {

@@ -12,7 +12,7 @@ import {
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Login() {
+ function Login() {
   const sessionToken = useSelector(selectSessionToken);
   const dispatch = useDispatch();
 
@@ -89,3 +89,6 @@ const styles = StyleSheet.create({
     paddingRight: 30
   },
 });
+
+
+export default Login;
